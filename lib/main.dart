@@ -5,84 +5,81 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  // Data gambar
+  List<String> images = List.generate(6, (index) => 
+  'https://source.unsplash.com/featured/?random');
+
+  // Daftar teks terkait dengan gambar
+  List<String> imageTexts = [
+    'Covid19Vaccine',
+    'Covid19TestResult',
+    'EHAC',
+    'Covid19Vaccine',
+    'Covid19TestResult',
+    'EHAC',
+     // Jika ada gambar tambahan
+  ];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Stack(
+        appBar: AppBar(
+          title: Text('Grid View Example'),
+        ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            // Gambar latar belakang
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              child: Image.network(
-                'https://img.freepik.com/free-vector/aesthetic-dreamy-background-purple-cloudy-sky-vector-glitter-design_53876-156334.jpg?size=626&ext=jpg&ga=GA1.1.735520172.1710979200&semt=sph',
-                fit: BoxFit.cover,
-                height: 200.0, // Tinggi gambar latar belakang
-              ),
-            ),
-            // Foto profil di perbatasan
-            Positioned(
-              top: 150.0, // Penyesuaian posisi vertikal foto profil
-              left: 16.0, // Jarak dari tepi kiri
-              child: CircleAvatar(
-                radius: 50.0,
-                backgroundImage: NetworkImage('https://via.placeholder.com/150'),
-              ),
-            ),
-            // Konten utama
+          Container(color: Colors.blue, // Warna latar belakang
+              child:
+           Padding(
+  padding: const EdgeInsets.all(8.0),
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+      Text(
+        'Entering Public Space?',
+        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      ),
+      Text(
+        'Stay alert to stay safe',
+        style: TextStyle(fontSize: 16),
+      ),
+      ],
+      ),
+       SizedBox(width: 75), // Jarak antara teks dan gambar
+      Image.network('https://via.placeholder.com/50')
+    ],
+  ),
+),
+),
+
             Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  
-                  SizedBox(height: 200.0), // Penyesuaian jarak vertikal dari atas
-                   Align(
-                        alignment: Alignment.centerRight,
-                        child: Container(
-                          padding: EdgeInsets.all(4.0),
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          child: Text(
-                            'Follow',
-                            style: TextStyle(color: Colors.white),
-                          ),
+              padding: const EdgeInsets.all(8.0),
+              child: GridView.builder(
+                shrinkWrap: true,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3, // 3 kolom
+                  mainAxisSpacing: 10.0,
+                  crossAxisSpacing: 10.0,
+                ),
+                itemCount: images.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return GridTile(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Expanded(
+                          child: Image.network(images[index], fit: BoxFit.cover),
                         ),
-                      ),
-                  // Informasi profil
-                  Row(
-                    children: <Widget>[
-                      
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              'Username',
-                              style: TextStyle(
-                                fontSize: 24.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(height: 8.0),
-                            Text(
-                              'Bio',
-                              style: TextStyle(
-                                fontSize: 16.0,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      // Tombol follow
-                     
-                    ],
-                  ),
-                ],
+                        Text(imageTexts[index]), // Teks terkait dengan gambar
+                      ],
+                    ),
+                  );
+                },
               ),
             ),
           ],
