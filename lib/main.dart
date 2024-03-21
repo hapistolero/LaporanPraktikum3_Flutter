@@ -12,11 +12,24 @@ class MyApp extends StatelessWidget {
         body: Stack(
           children: <Widget>[
             // Gambar latar belakang
-            Image.network(
-              'https://via.placeholder.com/400x200',
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: double.infinity,
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Image.network(
+                'https://img.freepik.com/free-vector/aesthetic-dreamy-background-purple-cloudy-sky-vector-glitter-design_53876-156334.jpg?size=626&ext=jpg&ga=GA1.1.735520172.1710979200&semt=sph',
+                fit: BoxFit.cover,
+                height: 200.0, // Tinggi gambar latar belakang
+              ),
+            ),
+            // Foto profil di perbatasan
+            Positioned(
+              top: 150.0, // Penyesuaian posisi vertikal foto profil
+              left: 16.0, // Jarak dari tepi kiri
+              child: CircleAvatar(
+                radius: 50.0,
+                backgroundImage: NetworkImage('https://via.placeholder.com/150'),
+              ),
             ),
             // Konten utama
             Padding(
@@ -24,55 +37,50 @@ class MyApp extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  // Foto profil dan tombol follow
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Stack(
-                        children: <Widget>[
-                          // Foto profil
-                          CircleAvatar(
-                            radius: 50.0,
-                            backgroundImage: NetworkImage('https://via.placeholder.com/150'),
+                  
+                  SizedBox(height: 200.0), // Penyesuaian jarak vertikal dari atas
+                   Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                          padding: EdgeInsets.all(4.0),
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(20.0),
                           ),
-                          // Tombol follow
-                          Positioned(
-                            bottom: 0,
-                            right: 0,
-                            child: Container(
-                              padding: EdgeInsets.all(4.0),
-                              decoration: BoxDecoration(
-                                color: Colors.blue,
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              child: Text(
-                                'Follow',
-                                style: TextStyle(color: Colors.white),
+                          child: Text(
+                            'Follow',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                  // Informasi profil
+                  Row(
+                    children: <Widget>[
+                      
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              'Username',
+                              style: TextStyle(
+                                fontSize: 24.0,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                          ),
-                        ],
+                            SizedBox(height: 8.0),
+                            Text(
+                              'Bio',
+                              style: TextStyle(
+                                fontSize: 16.0,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      // Spacer untuk menjaga jarak antara foto profil dan tombol follow dengan tepi layar
-                      Spacer(),
+                      // Tombol follow
+                     
                     ],
-                  ),
-                  SizedBox(height: 16.0),
-                  // Informasi profil
-                  Text(
-                    'Username',
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 8.0),
-                  Text(
-                    'Bio',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                    ),
                   ),
                 ],
               ),
